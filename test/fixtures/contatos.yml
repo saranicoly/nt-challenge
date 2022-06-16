@@ -1,0 +1,11 @@
+one:
+  email: MyString
+  phone_number: 001002003
+  birthday: 2022-06-16
+  weight: 80.5
+
+two:
+  email: MyString
+  phone_number: 300200100
+  birthday: 2022-06-16
+  weight: 60.1
