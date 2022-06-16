@@ -1,24 +1,19 @@
-# README
+# Teste Neurotech
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Descrição & pré-requisitos
 
-Things you may want to cover:
+A API do backend foi criada usando Ruby on Rails, com autenticação com o hubspot através de API key, visto que infelizmente não houve tempo o suficiente para que eu pudesse realizar a integração através de OAuth no localhost.
 
-* Ruby version
+A chave de API deve ser editada no arquivo `projeto/app/controllers/application_controller.rb` na linha 5.
 
-* System dependencies
+Instale a dependência do cliente do hubspot bem como demais dependências com um `bundle install`.
 
-* Configuration
+Para executar o projeto, basta executar  o comando `rails s` na pasta, e se dirigir ao endereço `localhost:3000`.
 
-* Database creation
+## Melhorias
 
-* Database initialization
+Uma melhoria imediata seria usarmos autenticação po OAuth, como dado nos requisitos do desafio.
 
-* How to run the test suite
+Outra melhororia relevante seria aprimorar o front-end de forma a deixá-lo mais atrativo, através de alguma tecnologia como React.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Por fim, encapsular o projeto com o Docker e poder realizar o deploy desse container em alguma plataforma (como o Heroku ou o Cloud Run do GCP) deixariam a aplicação no ar de forma portátil.

@@ -23,6 +23,8 @@ class ContatosController < ApplicationController
   def create
     @contato = Contato.new(contato_params)
 
+    config_hubspot_post
+
     respond_to do |format|
       if @contato.save
         format.html { redirect_to contato_url(@contato), notice: "Contato was successfully created." }
@@ -58,7 +60,6 @@ class ContatosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_contato
       @contato = Contato.find(params[:id])
     end
@@ -66,5 +67,23 @@ class ContatosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def contato_params
       params.require(:contato).permit(:email, :phone_number, :birthday, :weight)
+    end
+
+    def config_hubspot_post
+      properties = {
+        "email": @contato.email,
+        "phone_number": @contato.phone_number,
+        "birthday": @contato.birthday,
+        "weight": @contato.weight
+      }
+
+      simple_public_object_input = Hubspot::Crm::Contacts::SimplePublicObjectInput.new(properties: properties)
+      begin
+        api_response = Hubspot::Crm::Contacts::BasicApi.new.create(simple_public_object_input, auth_names: "oauth2")
+        puts api_response
+      rescue Hubspot::Crm::Contacts::ApiError => e
+        error_message = JSON.parse(e.response_body)['message']
+        puts error_message
+      end
     end
 end
